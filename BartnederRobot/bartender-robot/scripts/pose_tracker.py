@@ -44,7 +44,7 @@ class PoseTracker():
         self.marker_side = 0.039
         
         #aruco marker tracks all the markers in the frame and returns poses as list, specify which pose belongs to what 
-        self.robot_base_id,self.robot_ef_id, self.workpiece_id = 2,0,1
+        self.robot_base_id,self.robot_ef_id, self.workpiece_id = 1,0,2
         self.pub = rospy.Publisher('arm_tracking/tracked_image',Image, queue_size=10)
         self.pose_tracking_pub = rospy.Publisher('arm_tracking/pose_tracking',TrackedPose,queue_size=10)
         self.pose_tracking_sub = rospy.Subscriber('arm_tracking/pose_tracking',TrackedPose,self.get_tracked_pose)
@@ -105,8 +105,8 @@ class PoseTracker():
             
             frame_markers = aruco.drawDetectedMarkers(frame.copy(), corners, ids)
             
-#            tracked_pose_msg.robot_base_rvec = output[self.robot_base_id][0].squeeze()
-#            tracked_pose_msg.robot_base_tvec = output[self.robot_base_id][1].squeeze()
+            tracked_pose_msg.robot_base_rvec = output[self.robot_base_id][0].squeeze()
+            tracked_pose_msg.robot_base_tvec = output[self.robot_base_id][1].squeeze()
             tracked_pose_msg.robot_ef_rvec   = output[self.robot_ef_id][0].squeeze()
             tracked_pose_msg.robot_ef_tvec   = output[self.robot_ef_id][1].squeeze()
 #            tracked_pose_msg.workpiece_rvec   = output[self.workpiece_id][0].squeeze()
