@@ -5,7 +5,7 @@ class PoseTextHelper:
     @staticmethod
     def parse_pose_string(pose_file):
         
-        file1 = open("pre_grasp.txt","r") 
+        file1 = open(pose_file,"r") 
         valid_set = set(['x', 'y', 'z', 'w'])
         pose_list = []
         for t in file1.readlines():
